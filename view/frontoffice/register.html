@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DealHub - Inscription</title>
     <link rel="stylesheet" href="register.css">
+    <script>
+        function validateForm() {
+            var nom = document.forms["registrationForm"]["nom"].value;
+            var prenom = document.forms["registrationForm"]["prenom"].value;
+            var email = document.forms["registrationForm"]["email"].value;
+            var password = document.forms["registrationForm"]["password"].value;
+            var role = document.forms["registrationForm"]["role"].value;
+
+            if (nom == "" || prenom == "" || email == "" || password == "" || role == "") {
+                alert("Tous les champs doivent être remplis");
+                return false;
+            }
+
+            // Validation d'email basique
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Adresse email invalide");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
     <video class="background-video" autoplay loop muted>
@@ -22,7 +45,7 @@
         <!-- Right form panel -->
         <div class="register-form">
             <h2>Créer un compte</h2>
-            <form action="../backoffice/register.php" method="POST">
+            <form name="registrationForm" action="../frontoffice/register.php" method="POST" onsubmit="return validateForm()">
                 <input type="text" name="nom" placeholder="Nom" required>
                 <input type="text" name="prenom" placeholder="Prénom" required>
                 <input type="email" name="email" placeholder="Email" required>
