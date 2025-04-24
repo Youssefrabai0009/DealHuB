@@ -4,7 +4,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'investisseur') {
     header("Location: login.html");
     exit;
 }
+
+
+
 $user = $_SESSION['user'];
+
+$userEmail = $_SESSION['user']['email'] ?? 'investisseur@example.com';
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +28,12 @@ $user = $_SESSION['user'];
             <ul>
                 <li><a href="home.html">Accueil</a></li>
                 <li><a href="#">Mon Profil</a></li>
-                <li><a href="home.html">Déconnexion</a></li>
+                <li><a href="logout.php">Déconnexion</a></li>
+                <li> <a class="font-medium"><?= htmlspecialchars($userEmail) ?>  Connecté</a></li>
+
+          </div>
+
+          
             </ul>
         </nav>
     </header>

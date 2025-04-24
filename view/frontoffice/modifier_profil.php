@@ -1,13 +1,13 @@
 <?php
 session_start();
+if (!isset($_SESSION['user'])) {
+  header("Location: ../frontoffice/login.html");
+  exit;
+}
 require_once '../../config.php';
 require_once '../../controller/UserController.php';
 require_once '../../model/User.php';
 
-if (!isset($_SESSION['user'])) {
-    header("Location: login.html");
-    exit();
-}
 
 $userController = new UserController($pdo);
 $currentUser = $_SESSION['user'];
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     $updatedUser = new User($nom, $prenom, $email, $currentUser['role']);
-    $userController->updateUser($updatedUser, $userId);
+    $userController->updateUserFront($updatedUser, $userId);
 
     // Update session
     $_SESSION['user']['nom'] = $nom;
@@ -50,24 +50,33 @@ $email = htmlspecialchars($currentUser['email']);
 <html>
 <head>
     <title>Modifier Profil</title>
-    <link rel="stylesheet" href="profil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="modifier_profil.css">
 </head>
 <body>
     <div class="profile-container">
         <h2>Modifier votre profil</h2>
         <form method="POST">
-            <label>Nom:</label>
-            <input type="text" name="nom" value="<?= $nom ?>">
+            <div class="form-group">
+                <label>Nom:</label>
+                <input type="text" name="nom" value="<?= $nom ?>" required>
+            </div>
 
-            <label>Prénom:</label>
-            <input type="text" name="prenom" value="<?= $prenom ?>">
+            <div class="form-group">
+                <label>Prénom:</label>
+                <input type="text" name="prenom" value="<?= $prenom ?>" required>
+            </div>
 
-            <label>Email:</label>
-            <input type="email" name="email" value="<?= $email ?>">
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" value="<?= $email ?>" required>
+            </div>
 
-            <button type="submit">Enregistrer</button>
+            <button type="submit">Enregistrer les modifications</button>
+            <a href="<?= ($currentUser['role'] === 'investisseur') 
+                        ? '/template/view/frontoffice/investisseur.php' 
+                        : '/template/view/frontoffice/entrepreneur.php' ?>" class="back-link">Retour au tableau de bord</a>
         </form>
     </div>
 </body>
-
 </html>

@@ -4,7 +4,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'entrepreneur') {
     header("Location: login.html");
     exit;
 }
+
 $user = $_SESSION['user'];
+
+$userEmail = $_SESSION['user']['email'] ?? 'entrepreneur@example.com';
+
 ?>
 
 
@@ -23,7 +27,13 @@ $user = $_SESSION['user'];
             <ul>
                 <li><a href="home.html">Accueil</a></li>
                 <li><a href="#">Mon Profil</a></li>
-                <li><a href="../../index.html">Déconnexion</a></li>
+                <li><a href="logout.php">Déconnexion</a></li>
+
+                <div>
+          <p class="font-medium"><?= htmlspecialchars($userEmail) ?></p>
+          <p class="text-xs text-gray-500">Connecté</p>
+
+          </div>
             </ul>
         </nav>
     </header>
@@ -43,8 +53,8 @@ $user = $_SESSION['user'];
 
         <!-- Buttons: Modifier / Supprimer -->
         <div class="profile-actions">
-            <a href="modifier_profil.php" class="btn update-btn">Modifier Profil</a>
-            <a href="supprimer_compte.php" class="btn delete-btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">Supprimer Compte</a>
+        <a href="modifier_profil.php" class="btn update-btn">Modifier Profil</a>
+        <a href="supprimer_compte.php" class="btn delete-btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">Supprimer Compte</a>
         </div>
     </div>
 

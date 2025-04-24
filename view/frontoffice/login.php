@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
-        echo "Veuillez remplir tous les champs.";
+        header("Location: login.html?error=Veuillez remplir tous les champs.");
         exit;
     }
 
@@ -18,12 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user'] = $user;
-
+            session_regenerate_id(true); // add this line
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'nom' => $user['nom'],
+                'prenom' => $user['prenom'],
+                'email' => $user['email'],
+                'role' => $user['role']
+            ];
+            
+            
             // Redirect based on role
             switch ($user['role']) {
                 case 'admin':
-                    header("Location: ../backoffice/dashboard.html");
+                    header("Location: ../backoffice/dashboard.php");
                     break;
                 case 'investisseur':
                     header("Location: ../frontoffice/investisseur.php");
@@ -32,14 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     header("Location: ../frontoffice/entrepreneur.php");
                     break;
                 default:
-                    echo "Rôle non reconnu.";
+                    header("Location: login.html?error=Rôle non reconnu.");
             }
             exit;
         } else {
-            echo "Email ou mot de passe incorrect.";
+            header("Location: login.html?error=Email ou mot de passe incorrect.");
         }
     } catch (PDOException $e) {
-        echo "Erreur lors de la connexion : " . $e->getMessage();
+        header("Location: login.html?error=Erreur lors de la connexion. Veuillez réessayer.");
     }
 }
+
+
 ?>
