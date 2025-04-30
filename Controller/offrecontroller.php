@@ -5,7 +5,9 @@ include __DIR__.'/../Model/offre.php';
 class offrecontroller
 {
     public function listoffers(){
-        $sql = 'SELECT * FROM offres';
+        $sql =  "SELECT o.*, c.libelle_categorie 
+        FROM offres o
+        JOIN categories c ON o.id_categorie = c.id_categorie";;
         $db = config::getConnexion();
         try {
             $list = $db->query($sql);

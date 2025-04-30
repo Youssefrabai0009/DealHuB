@@ -3,7 +3,7 @@ include __DIR__.'/../../Controller/categoriecontroller.php';
 $categorie = new catcontroller();
 $list = $categorie->listcategories();
 $categorie->deletecategorie($_GET['id_categorie']);
-
+header("Location: showcategorie.php");
 
 ?>
 <!DOCTYPE html>

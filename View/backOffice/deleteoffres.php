@@ -45,27 +45,25 @@ $categories = $cat->listcategories();
       <div class="bg-white p-6 rounded-xl shadow">
         <h2 class="text-xl font-semibold mb-4">Historique des offres</h2>
         <div class="overflow-auto">
-        <table class="table table-bordered table-hover text-center">
-  <thead class="table-dark">
-    <tr>
-      <th>ID_offre</th>
-      <th>Montant</th>
-      <th>Date_offre</th>
-      <th>Statut</th>
-      <th>ID_categorie</th>
-      <th>Action</th>
+        <table class="w-full text-left border-t border-gray-200 mt-4">
+  <thead>
+    <tr class="text-sm text-gray-500 uppercase bg-gray-100">
+      <th class="py-2 px-4">Montant</th>
+      <th class="py-2 px-4">Date Offre</th>
+      <th class="py-2 px-4">Statut</th>
+      <th class="py-2 px-4">Catégorie</th>
+      <th class="py-2 px-4 text-center">Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="text-sm text-gray-700">
     <?php foreach ($list as $offre): ?>
-      <tr>
-        <td><?= htmlspecialchars($offre['id_offre']) ?></td>
-        <td><?= htmlspecialchars($offre['montant']) ?> DT</td>
-        <td><?= htmlspecialchars($offre['date_offre']) ?></td>
-        <td><?= htmlspecialchars($offre['statut']) ?></td>
-        <td><?= htmlspecialchars($offre['id_categorie']) ?></td>
-        <td>
-          <a href="deleteoffre.php?id_offre=<?= $offre['id_offre'] ?>" class="btn btn-sm btn-danger" title="Supprimer"
+      <tr class="border-t hover:bg-gray-50">
+        <td class="py-2 px-4"><?= htmlspecialchars($offre['montant']) ?> DT</td>
+        <td class="py-2 px-4"><?= htmlspecialchars($offre['date_offre']) ?></td>
+        <td class="py-2 px-4"><?= htmlspecialchars($offre['statut']) ?></td>
+        <td class="py-2 px-4"><?= htmlspecialchars($offre['libelle_categorie']) ?></td>
+        <td class="py-2 px-4 text-center">
+          <a href="deleteoffres.php?id_offre=<?= $offre['id_offre'] ?>" class="text-danger" title="Supprimer"
             onclick="return confirm('Supprimer cette offre ?');">
             <i class="fas fa-trash-alt"></i>
           </a>

@@ -1,6 +1,8 @@
 <?php
 include __DIR__.'/../../Controller/offrecontroller.php';
-
+include __DIR__.'/../../Controller/categoriecontroller.php';
+$cat = new catcontroller();
+$categories = $cat->listcategories();
 $error = '';
 $offer = null;
 $offrecontroller = new offrecontroller();
@@ -45,9 +47,96 @@ if (isset($_GET['id_offre'])) {
   <meta charset="UTF-8">
   <title>Modifier une offre</title>
   <link rel="stylesheet" href="formcss.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Styling pour la navbar */
+    .navbar {
+      background-color: #2F1A4A;
+    }
+    .navbar-brand {
+      color: #F5F2F6;
+    }
+    .navbar-nav .nav-link {
+      color: #F5F2F6;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #A093AF;
+    }
+
+    /* Styling du formulaire */
+    .form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #F5F2F6;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #2F1A4A;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #2F1A4A;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #A093AF;
+      border-radius: 5px;
+    }
+
+    .form-group .error {
+      color: red;
+      font-size: 0.8em;
+    }
+
+    .form-container button {
+      background-color: #2F1A4A;
+      color: #F5F2F6;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background-color: #A093AF;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #2F1A4A;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">DealHub</a>
+      <div class="navbar-nav ml-auto">
+        <a class="nav-link" href="acceuil.html">Home</a>
+        <a class="nav-link" href="#">Profile</a>
+        <a class="nav-link" href="acceuil.html">Logout</a>
+      </div>
+    </div>
+  </nav>
   <div class="form-container">
     <h2>Modifier une offre</h2>
     <form action="#" method="POST">
@@ -75,10 +164,19 @@ if (isset($_GET['id_offre'])) {
       </div>
 
       <div class="form-group">
-        <label for="id_categorie">ID Catégorie</label>
-        <input type="text" name="id_categorie" id="id_categorie" value="<?php echo $offer ? $offer['id_categorie'] : ''; ?>">
-        <span class="error" id="error-categorie"></span>
-      </div>
+  <label for="id_categorie">Catégorie</label>
+  <select name="id_categorie" id="id_categorie" class="form-control">
+    <?php foreach ($categories as $categorie): ?>
+      <option value="<?= $categorie['id_categorie'] ?>"
+        <?= ($offer && $offer['id_categorie'] == $categorie['id_categorie']) ? 'selected' : '' ?>>
+        <?= htmlspecialchars($categorie['libelle_categorie']) ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+  <span class="error" id="error-categorie"></span>
+</div>
+
+      
 
       <button type="submit">Modifier l'offre</button>
       <a class="back-link" href="index.php">← Retour à la page d'acceuil</a>
