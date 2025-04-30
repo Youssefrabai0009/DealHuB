@@ -7,6 +7,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 
 $userEmail = $_SESSION['user']['email'] ?? 'admin@example.com';
 
+// Gestion des notifications
+$notifications = $_SESSION['notifications'] ?? [];
+// Nettoyer les notifications après affichage (flash message)
+unset($_SESSION['notifications']);
+
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +38,23 @@ $userEmail = $_SESSION['user']['email'] ?? 'admin@example.com';
     .stat-card:hover {
       transform: translateY(-5px);
     }
+
+    .notification-dropdown {
+      display: none; /* caché par défaut */
+      position: absolute;
+      right: 0;
+      margin-top: 0.5rem;
+      width: 16rem;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+    }
   </style>
+
 </head>
+
 <body class="bg-gray-50">
   <div class="flex h-screen">
 
@@ -45,7 +65,7 @@ $userEmail = $_SESSION['user']['email'] ?? 'admin@example.com';
         <span class="text-2xl font-bold text-blue-600">Backoffice</span>
       </div>
       <nav class="flex-1 space-y-1 px-4 py-2">
-        <a href="dashboard.html" class="sidebar-link active flex items-center space-x-3 p-3 rounded-lg">
+        <a href="dashboard.php" class="sidebar-link active flex items-center space-x-3 p-3 rounded-lg">
           <i class="fas fa-tachometer-alt w-6 text-center"></i>
           <span>Dashboard</span>
         </a>
@@ -89,11 +109,48 @@ $userEmail = $_SESSION['user']['email'] ?? 'admin@example.com';
             <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
             <input type="text" placeholder="Rechercher..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
-          <button class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200">
-            <i class="fas fa-bell"></i>
-          </button>
+          
+      <!-- Notification Bell -->
+      <div class="relative">
+            <button id="notificationButton" class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 relative">
+              <i class="fas fa-bell"></i>
+              <?php if (count($notifications) > 0): ?>
+                <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-400"></span>
+              <?php endif; ?>
+            </button>
+            <div id="notificationDropdown" class="notification-dropdown">
+              <div class="p-4 border-b font-semibold">Notifications</div>
+              <?php if (count($notifications) > 0): ?>
+                <?php foreach ($notifications as $note): ?>
+                  <div class="p-4 hover:bg-gray-100 border-b last:border-0 text-sm">
+                    <?= htmlspecialchars($note) ?>
+                  </div>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <div class="p-4 text-gray-400 text-center">Aucune notification</div>
+              <?php endif; ?>
+            </div>
+          </div>
+
         </div>
       </div>
+      <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const notificationButton = document.getElementById('notificationButton');
+  const notificationDropdown = document.getElementById('notificationDropdown');
+
+  notificationButton.addEventListener('click', function() {
+    notificationDropdown.style.display = notificationDropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', function(event) {
+    if (!notificationButton.contains(event.target) && !notificationDropdown.contains(event.target)) {
+      notificationDropdown.style.display = 'none';
+    }
+  });
+});
+</script>
+
 
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -217,5 +274,107 @@ $userEmail = $_SESSION['user']['email'] ?? 'admin@example.com';
       </div>
     </main>
   </div>
+</body>
+</html>
+
+<?php
+// Include the UserController (handles users-related functions)
+require_once '../../controller/UserController.php';
+
+// Include the User model (represents a user)
+require_once '../../model/user.php';
+
+// Include the config file (contains database connection)
+require_once '../../config.php';
+
+// Start the session to use session variables
+session_start();
+
+// Check if the user is not logged in OR not an admin, redirect them to login page
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+    header("Location: ../frontoffice/login.html");
+    exit;
+}
+
+// Fetch all users from the database
+$stmt = $pdo->query("SELECT * FROM users");
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Calculate total number of users
+$totalUsers = count($users);
+
+// Count how many users are 'admin'
+$adminCount = count(array_filter($users, fn($user) => $user['role'] === 'admin'));
+
+// Count how many users are 'entrepreneur'
+$entrepreneurCount = count(array_filter($users, fn($user) => $user['role'] === 'entrepreneur'));
+
+// Count how many users are 'investisseur' (investors)
+$investorCount = count(array_filter($users, fn($user) => $user['role'] === 'investisseur'));
+?>
+
+<!-- HTML part starts here -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistiques des Utilisateurs</title>
+
+    <!-- Import Chart.js library (for graphs) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Import TailwindCSS (for nice styling) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-8">
+    <!-- Body with gray background, centered content -->
+
+    <!-- Main title -->
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Statistiques des Utilisateurs</h1>
+
+    <!-- Container for the graph -->
+    <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+        <!-- The graph will be drawn inside this canvas -->
+        <canvas id="userStatsChart"></canvas>
+    </div>
+
+    <!-- Link to go back to dashboard -->
+    <div class="mt-6">
+        <a href="gestionusers.php" class="text-blue-600 hover:underline">⬅ Retour au dashboard</a>
+    </div>
+
+    <!-- JavaScript part to create the graph -->
+    <script>
+        // Get the canvas where we will draw the chart
+        const ctx = document.getElementById('userStatsChart').getContext('2d');
+
+        // Create a new Chart
+        new Chart(ctx, {
+            type: 'doughnut', // Type of chart (doughnut)
+            data: {
+                labels: ['Entrepreneurs', 'Investisseurs', 'Admins'], // Labels for each role
+                datasets: [{
+                    label: 'Répartition des utilisateurs', // Title for dataset
+                    data: [<?= $entrepreneurCount ?>, <?= $investorCount ?>, <?= $adminCount ?>], // Data from PHP counts
+                    backgroundColor: [
+                        '#34D399', // Color for Entrepreneurs (green)
+                        '#FBBF24', // Color for Investors (yellow)
+                        '#EF4444'  // Color for Admins (red)
+                    ],
+                    borderWidth: 1 // Border width around each part
+                }]
+            },
+            options: {
+                responsive: true, // Make the graph adjust on different screens
+                plugins: {
+                    legend: {
+                        position: 'bottom' // Move the legend to the bottom
+                    }
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>

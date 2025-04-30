@@ -5,6 +5,7 @@ class User {
     private $email;
     private $role;
 
+
     public function __construct($nom, $prenom, $email, $role) {
         $this->nom = $nom;
         $this->prenom = $prenom;
@@ -27,6 +28,9 @@ class User {
     public function getRole() {
         return $this->role;
     }
+
+    
+
 }
 
 ?>

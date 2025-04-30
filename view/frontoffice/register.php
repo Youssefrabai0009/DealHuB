@@ -51,15 +51,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect based on user role
         switch ($user['role']) {
-            case 'admin':
-                header("Location: ../backoffice/dashboard.html");
-                break;
+            
             case 'investisseur':
                 header("Location: ../frontoffice/investisseur.php");
                 break;
             case 'entrepreneur':
                 header("Location: ../frontoffice/entrepreneur.php");
                 break;
+                /*case 'admin':
+                    header("Location: ../backoffice/dashboard.php");
+                    break;*/
             default:
                 echo "Erreur de rôle.";
                 exit;

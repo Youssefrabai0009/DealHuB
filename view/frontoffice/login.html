@@ -18,6 +18,13 @@
         .input-error {
             border-color: #e74c3c !important;
         }
+        /*forgot password*/
+        .success-message {
+            color: #2ecc71;
+            font-size: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -48,9 +55,13 @@
                     </div>
                     <button type="submit" class="login-btn">Se connecter</button>
                 </form>
+
+             <!-- forgot password -->
                 <div class="register-link">
                     <p>Pas encore de compte ? <a href="register.html">s'inscrire</a></p>
+                    <p><a href="forgot_password.html">Mot de passe oublié ?</a></p>
                 </div>
+
             </div>
         </div>
     </div>
@@ -152,6 +163,19 @@
                 }
             }
         });
+
+        //forhot password
+        const success = urlParams.get('success');
+    if (success) {
+    const successMessage = document.createElement('p');
+    successMessage.className = 'success-message';
+    successMessage.textContent = success;
+    successMessage.style.color = '#2ecc71';
+    successMessage.style.textAlign = 'center';
+    successMessage.style.marginBottom = '15px';
+    successMessage.style.display = 'block';
+    loginForm.insertBefore(successMessage, loginForm.firstChild);
+}
     </script>
 </body>
 </html>

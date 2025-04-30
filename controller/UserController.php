@@ -27,6 +27,24 @@ class UserController {
         }
     }
 
+    /*public function addUser(User $user) {
+        try {
+            $sql = "INSERT INTO users (nom, prenom, email, role, password) 
+                    VALUES (:nom, :prenom, :email, :role, :password)";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                'nom' => $user->getNom(),
+                'prenom' => $user->getPrenom(),
+                'email' => $user->getEmail(),
+                'role' => $user->getRole(),
+                'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT)
+            ]);
+        } catch (PDOException $e) {
+            error_log("Error adding user: " . $e->getMessage());
+            return false;
+        }
+    }*/
+    
     // Delete a user by ID
     public function deleteUser($id) {
         try {
