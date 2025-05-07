@@ -159,3 +159,13 @@ footer {
 footer p {
     font-size: 1rem;
 }
+/*logo*/
+img {
+    background: transparent;
+    border-radius: 8px;
+    object-fit: contain;
+}
+.site-logo {
+    height: 40px;
+    filter: brightness(0) invert(1); /* This turns a black logo white */
+}

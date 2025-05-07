@@ -46,37 +46,3 @@ $prenom = htmlspecialchars($currentUser['prenom']);
 $email = htmlspecialchars($currentUser['email']);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Modifier Profil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="modifier_profil.css">
-</head>
-<body>
-    <div class="profile-container">
-        <h2>Modifier votre profil</h2>
-        <form method="POST">
-            <div class="form-group">
-                <label>Nom:</label>
-                <input type="text" name="nom" value="<?= $nom ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label>Prénom:</label>
-                <input type="text" name="prenom" value="<?= $prenom ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label>Email:</label>
-                <input type="email" name="email" value="<?= $email ?>" required>
-            </div>
-
-            <button type="submit">Enregistrer les modifications</button>
-            <a href="<?= ($currentUser['role'] === 'investisseur') 
-                        ? '/template/view/frontoffice/investisseur.php' 
-                        : '/template/view/frontoffice/entrepreneur.php' ?>" class="back-link">Retour au tableau de bord</a>
-        </form>
-    </div>
-</body>
-</html>

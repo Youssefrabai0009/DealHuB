@@ -1,117 +1,276 @@
-/* Reset & Base */
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #F5F2F6;
+    font-family: 'Open Sans', sans-serif;
     color: #2F1A4A;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background-color: #F5F2F6;
 }
 
-/* Header */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Header Styling */
 header {
-    background-color: #2F1A4A;
-    padding: 15px 0;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    left: 0;
+    width: 100%;
+    background-color: #2F1A4A; /* Example background color */
+    color: #fff;
+    padding: 10px 0;
+    z-index: 1000; /* Ensures the header stays on top of other content */
 }
 
-nav ul {
-    display: flex;
-    justify-content: center;
+/* Add some spacing to the body to prevent content from hiding behind the fixed header */
+body {
+    padding-top: 80px; /* Adjust based on the height of your header */
+}
+
+
+header .logo {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #F5F2F6;
+    text-transform: uppercase;
+}
+
+header nav ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    justify-content: flex-end;
 }
 
-nav ul li {
-    margin: 0 20px;
+header nav ul li {
+    margin-left: 30px;
 }
 
-nav ul li a {
+header nav ul li a {
     color: #F5F2F6;
     text-decoration: none;
-    font-size: 18px;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    transition: color 0.3s;
 }
 
-nav ul li a:hover {
-    color: rgb(180,164,26);
+header nav ul li a:hover {
+    color: #B4A41A;
 }
 
-/* Profile Card */
-.profile-container {
-    background-color: #fff;
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    flex: 1;
-}
-
-.profile-header {
+/* Hero Section */
+.hero {
+    background-color: #846CA0;
+    padding: 100px 0;
     text-align: center;
+    color: #F5F2F6;
+}
+
+.hero h2 {
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
-.profile-header h1 {
-    margin: 0;
-    font-size: 26px;
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
 }
 
-.profile-header .role {
-    font-style: italic;
-    color: #846CA0;
-}
-
-.profile-details p {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-/* Buttons */
-.profile-actions {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.btn {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
+.hero .btn {
+    background-color: #B4A41A;
+    color: #F5F2F6;
+    padding: 15px 30px;
     text-decoration: none;
-    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 5px;
 }
 
-.update-btn {
-    background-color: #846CA0;
+.hero .btn:hover {
+    background-color: #A093AF;
+}
+
+
+
+/* ===== PROFILE STYLES ===== */
+.profile-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    flex: 1;
+}
+
+.profile-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+
+
+
+
+.role-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.role-badge.entrepreneur {
+    background-color: #EDE9FE;
+    color: #5B21B6;
+}
+
+.profile-info {
+    margin: 30px 0;
+}
+
+.info-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--accent);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(132, 108, 160, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-item h3 {
+    margin: 0 0 5px 0;
+    font-size: 0.9rem;
+    color: #777;
+    font-weight: 500;
+}
+
+.info-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.edit-btn {
+    background-color: var(--primary);
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #3A225A; /* Slightly lighter shade of --primary for hover */
 }
 
 .delete-btn {
-    background-color: #e74c3c;
-}
-
-.update-btn:hover {
-    background-color: #6b5292;
+    background-color: var(--danger);
+    color: white;
 }
 
 .delete-btn:hover {
-    background-color: #c0392b;
+    background-color: #ff6253; /* Slightly lighter shade of --danger for hover */
 }
 
-/* Footer */
-footer {
-    background-color: #2F1A4A;
-    color: #fff;
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ===== FOOTER STYLES ===== */
+.dealhub-footer {
+    background-color: var(--primary);
+    color: white;
     text-align: center;
-    padding: 12px 0;
+    padding: 25px 0;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.dealhub-footer p {
+    margin: 0 0 15px 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .profile-card {
+        padding: 25px;
+    }
+    
+    .profile-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .action-btn {
+        justify-content: center;
+    }
 }

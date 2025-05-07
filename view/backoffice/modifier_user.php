@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="text-2xl font-bold text-blue-600">Backoffice</span>
             </div>
             <nav class="flex-1 space-y-1 px-4 py-2">
-                <a href="dashboard.html" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                <a href="dashboard.php" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
                     <i class="fas fa-tachometer-alt w-6 text-center"></i>
                     <span>Dashboard</span>
                 </a>
@@ -128,69 +128,117 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </aside>
 
-        <!-- Main content -->
-        <main class="flex-1 p-8 overflow-auto">
-            <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-bold text-gray-800">Modifier Utilisateur</h1>
-                    <a href="gestionusers.php" class="text-blue-600 hover:text-blue-800">
-                        <i class="fas fa-arrow-left"></i> Retour
-                    </a>
-                </div>
+ <!-- Main content -->
+<main class="flex-1 p-8 overflow-auto">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Modifier Utilisateur</h1>
+            <a href="gestionusers.php" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-arrow-left"></i> Retour
+            </a>
+        </div>
 
-                <?php if (!empty($errors)): ?>
-                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
-                        <?php foreach ($errors as $error): ?>
-                            <p><?= htmlspecialchars($error) ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-
-                <form method="POST">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="nom">
-                            Nom
-                        </label>
-                        <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               id="nom" name="nom" type="text" value="<?= htmlspecialchars($user['nom']) ?>" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="prenom">
-                            Prénom
-                        </label>
-                        <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               id="prenom" name="prenom" type="text" value="<?= htmlspecialchars($user['prenom']) ?>" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                            Email
-                        </label>
-                        <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               id="email" name="email" type="email" value="<?= htmlspecialchars($user['email']) ?>" required>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
-                            Rôle
-                        </label>
-                        <select class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                id="role" name="role" required>
-                            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
-                            <option value="investisseur" <?= $user['role'] === 'investisseur' ? 'selected' : '' ?>>Investisseur</option>
-                            <option value="entrepreneur" <?= $user['role'] === 'entrepreneur' ? 'selected' : '' ?>>Entrepreneur</option>
-                        </select>
-                    </div>
-
-                    <div class="flex items-center justify-end">
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                            <i class="fas fa-save mr-2"></i> Enregistrer
-                        </button>
-                    </div>
-                </form>
+        <form method="POST" id="userForm" novalidate>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nom">Nom</label>
+                <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       id="nom" name="nom" type="text" value="<?= htmlspecialchars($user['nom']) ?>">
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-nom"></p>
             </div>
-        </main>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="prenom">Prénom</label>
+                <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       id="prenom" name="prenom" type="text" value="<?= htmlspecialchars($user['prenom']) ?>">
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-prenom"></p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       id="email" name="email" type="email" value="<?= htmlspecialchars($user['email']) ?>">
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-email"></p>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="role">Rôle</label>
+                <select class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        id="role" name="role">
+                    <option value="">-- Choisir un rôle --</option>
+                    <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                    <option value="investisseur" <?= $user['role'] === 'investisseur' ? 'selected' : '' ?>>Investisseur</option>
+                    <option value="entrepreneur" <?= $user['role'] === 'entrepreneur' ? 'selected' : '' ?>>Entrepreneur</option>
+                </select>
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-role"></p>
+            </div>
+
+            <div class="flex items-center justify-end">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit">
+                    <i class="fas fa-save mr-2"></i> Enregistrer
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- JavaScript Inline Validation -->
+<script>
+document.getElementById('userForm').addEventListener('submit', function (event) {
+    let isValid = true;
+
+    const nom = document.getElementById('nom');
+    const prenom = document.getElementById('prenom');
+    const email = document.getElementById('email');
+    const role = document.getElementById('role');
+
+    const errorNom = document.getElementById('error-nom');
+    const errorPrenom = document.getElementById('error-prenom');
+    const errorEmail = document.getElementById('error-email');
+    const errorRole = document.getElementById('error-role');
+
+    // Reset all error messages
+    [errorNom, errorPrenom, errorEmail, errorRole].forEach(error => {
+        error.textContent = '';
+        error.classList.add('hidden');
+    });
+
+    // Validate fields
+    if (nom.value.trim() === '') {
+        errorNom.textContent = 'Le champ Nom est requis.';
+        errorNom.classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (prenom.value.trim() === '') {
+        errorPrenom.textContent = 'Le champ Prénom est requis.';
+        errorPrenom.classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (email.value.trim() === '') {
+        errorEmail.textContent = 'Le champ Email est requis.';
+        errorEmail.classList.remove('hidden');
+        isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        errorEmail.textContent = "L'adresse email est invalide.";
+        errorEmail.classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (role.value === '') {
+        errorRole.textContent = 'Veuillez sélectionner un rôle.';
+        errorRole.classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+</script>
+
+
     </div>
 </body>
 </html>

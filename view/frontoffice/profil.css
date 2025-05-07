@@ -1,45 +1,66 @@
-body {
+/* General Styles */
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #F5F2F6;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
   color: #2F1A4A;
+  background-color: #F5F2F6;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-top: 80px; /* Adjust based on the height of the header */
 }
 
-/* Header */
-header {
-  background-color: #2F1A4A;
-  padding: 15px 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-nav ul {
+.container {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; /* Match padding from home.css */
+}
+
+/* Header Styling */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2F1A4A;
+  color: #fff;
+  z-index: 1000;
+}
+
+header .logo {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #F5F2F6;
+  text-transform: uppercase;
+}
+
+header nav ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
-nav ul li {
-  margin: 0 20px;
+header nav ul li {
+  margin-left: 30px;
 }
 
-nav ul li a {
+header nav ul li a {
   color: #F5F2F6;
   text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
-nav ul li a:hover {
-  color: rgb(180,164,26);
+header nav ul li a:hover {
+  color: #B4A41A;
 }
 
 /* Profile Card */
@@ -66,6 +87,7 @@ nav ul li a:hover {
 .profile-header .role {
   font-style: italic;
   color: #846CA0;
+  margin-top: 5px;
 }
 
 .profile-details p {
@@ -80,15 +102,21 @@ nav ul li a:hover {
 }
 
 .btn {
+  background-color: #B4A41A;
+  color: #F5F2F6;
   padding: 10px 20px;
   margin: 10px;
   border: none;
   border-radius: 6px;
-  color: #fff;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #A093AF;
 }
 
 .update-btn {
@@ -114,3 +142,174 @@ footer {
   text-align: center;
   padding: 12px 0;
 }
+/*modifier profil css*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.modal-content .form-group {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  font-weight: 600;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  background-color: #846CA0;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.modal-content button:hover {
+  background-color: #6b5292;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.modal-content .form-group {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  font-weight: 600;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  background-color: #846CA0;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.modal-content button:hover {
+  background-color: #6b5292;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+/*logo*/
+img {
+  background: transparent;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-logo {
+  height: 40px;
+  filter: brightness(0) invert(1); /* This turns a black logo white */
+}
+
+

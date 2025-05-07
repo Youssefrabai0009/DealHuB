@@ -52,11 +52,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-gray-50">
     <div class="flex h-screen">
-        <!-- Sidebar (same as gestionusers.php) -->
-        <aside class="w-64 bg-white shadow-md flex flex-col">
-            <!-- ... Include your sidebar code from gestionusers.php ... -->
+      <!-- Sidebar -->
+      <aside class="w-64 bg-white shadow-md flex flex-col">
+            <div class="p-6 flex items-center space-x-2">
+                <i class="fas fa-chart-line text-blue-600 text-2xl"></i>
+                <span class="text-2xl font-bold text-blue-600">Backoffice</span>
+            </div>
+            <nav class="flex-1 space-y-1 px-4 py-2">
+                <a href="dashboard.php" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-tachometer-alt w-6 text-center"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="gestionusers.php" class="flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-600">
+                    <i class="fas fa-users w-6 text-center"></i>
+                    <span>Gestion users</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-tags w-6 text-center"></i>
+                    <span>Gestion categories</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-briefcase w-6 text-center"></i>
+                    <span>Gestion offres</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-comments w-6 text-center"></i>
+                    <span>Gestion speechs</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t">
+                <div class="flex items-center space-x-3">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=3B82F6&color=fff" alt="Admin" class="w-10 h-10 rounded-full">
+                    <div>
+                        <p class="font-medium">Admin</p>
+                        <p class="text-xs text-gray-500">Administrateur</p>
+                    </div>
+                </div>
+            </div>
         </aside>
-
         <!-- Main content -->
         <main class="flex-1 p-8 overflow-auto">
             <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">

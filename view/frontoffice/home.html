@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DealHub - Connect Entrepreneurs & Investors</title>
+    <title>DealHub - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
 
 <header>
     <div class="container">
-        <h1 class="logo">DealHub</h1>
+               <!-- Logo and Title -->
+               <div class="flex items-center flex-col text-center">
+                <h1 class="text-xl font-bold text-gray-800 mb-2">DealHub</h1>
+                <img src="../../assets/logoweb2-transparent.png" alt="DealHub Logo" class="site-logo">
+            </div>
         <nav>
             <ul>
                 <li><a href="#features">Fonctionnalités</a></li>
                 <li><a href="#about">À propos</a></li>
                 <li><a href="login.html">Se connecter</a></li>
-                <li><a href="../frontoffice/register.html" class="btn">S'inscrire</a></li>
+                <li><a href="../frontoffice/register.php" class="btn">S'inscrire</a></li>
             </ul>
         </nav>
     </div>
@@ -27,7 +33,7 @@
     <div class="container">
         <h2>Connectez les Entrepreneurs et les Investisseurs</h2>
         <p>Publiez votre pitch, obtenez des offres, et faites avancer vos projets avec l'aide des investisseurs. Trouvez des opportunités et investissez dans l'avenir.</p>
-        <a href="register.html" class="btn hero-btn">Commencez maintenant</a>
+        <a href="register.php" class="btn hero-btn">Commencez maintenant</a>
     </div>
 </section>
 
@@ -63,6 +69,204 @@
         <p>&copy; 2025 DealHub. Tous droits réservés.</p>
     </div>
 </footer>
+
+<!-- Chatbot -->
+<div class="chatbox" id="chatbox">
+    <div class="chatbox-header">
+      <span>Chatbot</span>
+      <button onclick="closeChat()">X</button>
+    </div>
+    <div class="chatbox-body" id="chatboxBody">
+      <div class="message bot"><span class="time">[Bot]</span> Hello! How can I assist you today?</div>
+    </div>
+    <div class="chatbox-footer">
+      <input type="text" id="userMessage" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  
+  <!-- Chatbot toggle button -->
+  <button onclick="toggleChat()" class="chat-toggle-button">💬</button>
+  💬
+  </button>
+  <style>
+    .chat-toggle-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #10b981;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+  
+  
+  <style>
+    .chatbox {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 320px;
+      height: 450px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+    }
+  
+    .chatbox-header {
+      background-color: #10b981;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .chatbox-body {
+      padding: 10px;
+      flex-grow: 1;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+  
+    .chatbox-footer {
+      display: flex;
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-radius: 0 0 10px 10px;
+      gap: 10px;
+    }
+  
+    .chatbox-footer input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+  
+    .chatbox-footer button {
+      padding: 10px 15px;
+      background-color: #10b981;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  
+    .message {
+      margin: 8px 0;
+      padding: 8px 12px;
+      border-radius: 10px;
+      max-width: 85%;
+      word-wrap: break-word;
+      position: relative;
+      font-size: 14px;
+    }
+  
+    .message.user {
+      background-color: #e1f5fe;
+      align-self: flex-end;
+      text-align: right;
+    }
+  
+    .message.bot {
+      background-color: #e8f5e9;
+      align-self: flex-start;
+      text-align: left;
+    }
+  
+    .time {
+      font-size: 11px;
+      color: #555;
+      display: block;
+      margin-bottom: 3px;
+    }
+  
+    @media (max-width: 500px) {
+      .chatbox {
+        width: 95%;
+        right: 2.5%;
+      }
+    }
+  </style>
+  
+  <script>
+    function toggleChat() {
+      const chatbox = document.getElementById("chatbox");
+      chatbox.style.display = (chatbox.style.display === "flex") ? "none" : "flex";
+    }
+  
+    function closeChat() {
+      document.getElementById("chatbox").style.display = "none";
+    }
+  
+    function getTime() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+  
+    function sendMessage() {
+      const input = document.getElementById("userMessage");
+      const message = input.value.trim();
+      const chatboxBody = document.getElementById("chatboxBody");
+  
+      if (message === "") return;
+  
+      // Show user message
+      chatboxBody.innerHTML += `<div class="message user"><span class="time">[You - ${getTime()}]</span>${message}</div>`;
+      input.value = "";
+      chatboxBody.scrollTop = chatboxBody.scrollHeight;
+  
+      // Simulated bot response
+      setTimeout(() => {
+        let msg = message.toLowerCase();
+        let response = "I'm not sure how to answer that. Can you rephrase it?";
+  
+        if (msg.includes("hello") || msg.includes("hi")) {
+          response = "Hello 👋! How can I help you with the site?";
+        } else if (msg.includes("how are you")) {
+          response = "I'm a chatbot — always ready to help! 😊";
+        } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
+          response = "DealHub is a platform that connects entrepreneurs with investors using video pitches and real-time analytics.";
+        } if (msg.includes("sign up") || msg.includes("register")) {
+            response = "To sign up, click 'Register' at the top of the homepage and fill in your details.";
+          } else if (msg.includes("log in") || msg.includes("login")) {
+            response = "To log in, just click 'Login' at the top and enter your email and password.";
+          } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
+            response = "DealHub helps connect entrepreneurs with investors through pitch videos and smart tools.";
+          } else if (msg.includes("how to invest")) {
+            response = "Create an investor account, then browse pitch videos to invest in promising startups.";
+          } else if (msg.includes("how to pitch") || msg.includes("upload pitch")) {
+            response = "As an entrepreneur, sign in and upload a video pitch through your dashboard.";
+          } else if (msg.includes("contact") || msg.includes("help")) {
+            response = "You can reach our support at support@dealhub.com 📧 or via the Contact section.";
+          } else if (msg.includes("account types") || msg.includes("roles")) {
+            response = "There are two account types: Entrepreneur and Investor. Choose one when registering.";
+          
+        } else if (msg.includes("logout") || msg.includes("sign out")) {
+          response = "To log out, click your profile icon and select 'Logout'.";
+
+        }else if (msg.includes("thanks") || msg.includes("sign out")) {
+          response = "your welcome 😊";
+        }
+  
+        chatboxBody.innerHTML += `<div class="message bot"><span class="time">[Bot - ${getTime()}]</span>${response}</div>`;
+        chatboxBody.scrollTop = chatboxBody.scrollHeight;
+      }, 800);
+    }
+  </script>
+  
 
 </body>
 </html>

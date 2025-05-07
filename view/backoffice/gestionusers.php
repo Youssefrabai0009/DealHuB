@@ -385,126 +385,182 @@ document.getElementById('ajoutUserForm').addEventListener('submit', function(eve
   </script>
 
   <!-- Chatbot -->
+<!-- Chatbot -->
 <div class="chatbox" id="chatbox">
   <div class="chatbox-header">
     <span>Chatbot</span>
-    <button onclick="closeChat()" class="text-white">X</button>
+    <button onclick="closeChat()">X</button>
   </div>
   <div class="chatbox-body" id="chatboxBody">
-    <div class="message bot">Hello! How can I assist you today?</div>
+    <div class="message bot"><span class="time">[Bot]</span> Hello! How can I assist you today?</div>
   </div>
   <div class="chatbox-footer">
-    <input type="text" id="userMessage" placeholder="Type a message...">
+    <input type="text" id="userMessage" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()">
     <button onclick="sendMessage()">Send</button>
   </div>
 </div>
 
 <!-- Chatbot toggle button -->
-<button onclick="toggleChat()" class="fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-full">
-  <i class="fas fa-comment-dots"></i>
+<button onclick="toggleChat()" class="fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-full z-50">
+  💬
 </button>
 
 <style>
-  /* Chatbot styling */
   .chatbox {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     right: 20px;
-    width: 300px;
-    height: 400px;
-    background-color: white;
+    width: 320px;
+    height: 450px;
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     display: none;
     flex-direction: column;
+    z-index: 999;
   }
+
   .chatbox-header {
-    background-color: #4CAF50;
+    background-color: #10b981;
     color: white;
     padding: 10px;
     text-align: center;
     border-radius: 10px 10px 0 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+
   .chatbox-body {
     padding: 10px;
     flex-grow: 1;
     overflow-y: auto;
+    background: #f9f9f9;
   }
+
   .chatbox-footer {
     display: flex;
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 0 0 10px 10px;
-  }
-  .chatbox-footer input {
-    flex-grow: 1;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-  }
-  .chatbox-footer button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    margin-left: 10px;
-  }
-  .message {
-    margin-bottom: 10px;
-  }
-  .message.bot {
-    color: #4CAF50;
-    font-weight: bold;
-  }
-  .message.user {
-    text-align: right;
-    color: #000;
-  }
-</style>
-<script>
-  // Toggle the chatbot visibility
-  function toggleChat() {
-    const chatbox = document.getElementById("chatbox");
-    chatbox.style.display = chatbox.style.display === "none" ? "flex" : "none";
+    gap: 10px;
   }
 
-  // Close the chatbot
+  .chatbox-footer input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+  }
+
+  .chatbox-footer button {
+    padding: 10px 15px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .message {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 85%;
+    word-wrap: break-word;
+    position: relative;
+    font-size: 14px;
+  }
+
+  .message.user {
+    background-color: #e1f5fe;
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  .message.bot {
+    background-color: #e8f5e9;
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .time {
+    font-size: 11px;
+    color: #555;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  @media (max-width: 500px) {
+    .chatbox {
+      width: 95%;
+      right: 2.5%;
+    }
+  }
+</style>
+
+<script>
+  function toggleChat() {
+    const chatbox = document.getElementById("chatbox");
+    chatbox.style.display = (chatbox.style.display === "flex") ? "none" : "flex";
+  }
+
   function closeChat() {
     document.getElementById("chatbox").style.display = "none";
   }
 
-  // Handle sending a message
+  function getTime() {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
   function sendMessage() {
-    const userMessage = document.getElementById("userMessage").value.trim();
-    if (userMessage !== "") {
-      // Display user's message
-      const chatboxBody = document.getElementById("chatboxBody");
-      chatboxBody.innerHTML += `<div class="message user">${userMessage}</div>`;
-      document.getElementById("userMessage").value = ""; // Clear input field
+    const input = document.getElementById("userMessage");
+    const message = input.value.trim();
+    const chatboxBody = document.getElementById("chatboxBody");
 
-      // Simulate bot response with conditions
-      setTimeout(function() {
-        let botResponse = '';
+    if (message === "") return;
 
-        // Simple conditions for dynamic responses
-        if (userMessage.toLowerCase().includes("hello")) {
-          botResponse = "Hi there! How can I help you today?";
-        } else if (userMessage.toLowerCase().includes("how are you")) {
-          botResponse = "I'm just a bot, but I'm doing great! Thanks for asking!";
-        } else if (userMessage.toLowerCase().includes("bye")) {
-          botResponse = "Goodbye! Have a great day!";
-        } else {
-          botResponse = "I'm not sure how to answer that. Can you ask something else?";
-        }
+    // Show user message
+    chatboxBody.innerHTML += `<div class="message user"><span class="time">[You - ${getTime()}]</span>${message}</div>`;
+    input.value = "";
+    chatboxBody.scrollTop = chatboxBody.scrollHeight;
 
-        // Add bot response
-        chatboxBody.innerHTML += `<div class="message bot">${botResponse}</div>`;
-        chatboxBody.scrollTop = chatboxBody.scrollHeight; // Scroll to the latest message
-      }, 1000);
-    }
+    // Simulated bot response
+    setTimeout(() => {
+      let msg = message.toLowerCase();
+      let response = "I'm not sure how to answer that. Can you rephrase it?";
+
+      if (msg.includes("hello") || msg.includes("hi")) {
+        response = "Hello 👋! How can I help you with the site?";
+      } else if (msg.includes("how are you")) {
+        response = "I'm a chatbot — always ready to help! 😊";
+      } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
+        response = "DealHub is a platform that connects entrepreneurs with investors using video pitches and real-time analytics.";
+      } else if (msg.includes("add user") || msg.includes("create user")) {
+        response = "To add a user, click the '+' button next to the search bar. A form will appear to enter user info.";
+      } else if (msg.includes("delete user") || msg.includes("remove user")) {
+        response = "To delete a user, click the trash 🗑️ icon next to their row in the table.";
+      } else if (msg.includes("edit user") || msg.includes("edit profile")) {
+        response = "To edit a user, click the pencil ✏️ icon. You can update name, email, or role.";
+      } else if (msg.includes("roles") || msg.includes("what roles")) {
+        response = "There are two roles: 'entrepreneur' and 'investor'. Admins manage them from this dashboard.";
+      } else if (msg.includes("statistics") || msg.includes("stats")) {
+        response = "User statistics are shown on the dashboard homepage under 'Statistiques'.";
+      } else if (msg.includes("logout") || msg.includes("sign out")) {
+        response = "To log out, click your profile icon and select 'Logout'.";
+      }else if (msg.includes("thanks") || msg.includes("sign out")) {
+        response = "your welcome 😊";
+      }
+
+      chatboxBody.innerHTML += `<div class="message bot"><span class="time">[Bot - ${getTime()}]</span>${response}</div>`;
+      chatboxBody.scrollTop = chatboxBody.scrollHeight;
+    }, 800);
   }
 </script>
+
+
 <script>
   function openModal() {
     document.getElementById("ajoutUserModal").classList.remove("hidden");
