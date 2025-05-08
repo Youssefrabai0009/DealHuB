@@ -7,7 +7,7 @@ use Dompdf\Options;
 
 session_start();
 
-// Check if user is logged in and admin
+// Check if admin is logged in
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header("Location: ../../view/frontoffice/login.html");
     exit;
@@ -16,13 +16,14 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 // Fetch users
 $stmt = $pdo->query("SELECT nom, prenom, email, role FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// Path to the logo image
-$logoPath = realpath('../../assets/logoweb.png');
 
-// Check if the image exists
-if ($logoPath === false) {
+// Path to the logo image
+$logoPath = realpath('../../assets/logoweb2.png');
+if (!$logoPath || !file_exists($logoPath)) {
     die('Logo image not found!');
 }
+$logoBase64 = base64_encode(file_get_contents($logoPath));
+$logoSrc = 'data:image/png;base64,' . $logoBase64;
 
 // Start building HTML for PDF
 $html = '
@@ -31,43 +32,58 @@ $html = '
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            padding: 30px;
+            color: #333;
         }
+
         header {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .logo {
-    max-width: 150px;  /* Adjust the width as needed */
-    height: auto;      /* Maintain aspect ratio */
-}
+            width: 120px;
+        }
+
         h1 {
             font-size: 24px;
+            color: #0056b3;
             margin-top: 10px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 14px;
         }
-        table, th, td {
-            border: 1px solid #000;
-        }
+
         th, td {
+            border: 1px solid #cccccc;
             padding: 10px;
             text-align: left;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
         }
     </style>
 </head>
 <body>
     <header>
-<img src="C:/xampp/htdocs/template/assets/logoweb.png" alt="DealHub Logo" class="logo">
-        <h1>DealHub - Liste des utilisateurs</h1>
+        <img src="' . $logoSrc . '" alt="DealHub Logo" class="logo">
+        <h1>DealHub - Liste des Utilisateurs</h1>
     </header>
+
     <table>
         <thead>
             <tr>
@@ -88,20 +104,21 @@ foreach ($users as $user) {
     $html .= '</tr>';
 }
 
-$html .= '</tbody>
+$html .= '
+        </tbody>
     </table>
 </body>
 </html>';
 
-// Dompdf setup
+// Setup Dompdf
 $options = new Options();
 $options->set('defaultFont', 'Arial');
+$options->set('isRemoteEnabled', true); // Important for image rendering
 
 $dompdf = new Dompdf($options);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
-// Stream the PDF (set Attachment to true for download)
+// Output the PDF
 $dompdf->stream("liste_utilisateurs.pdf", ["Attachment" => true]);
-?>

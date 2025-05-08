@@ -536,6 +536,8 @@ document.getElementById('ajoutUserForm').addEventListener('submit', function(eve
         response = "Hello 👋! How can I help you with the site?";
       } else if (msg.includes("how are you")) {
         response = "I'm a chatbot — always ready to help! 😊";
+      } else if (msg.includes("i want you to help me")) {
+        response = "yes fr I'm a chatbot always ready to help! 😊";
       } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
         response = "DealHub is a platform that connects entrepreneurs with investors using video pitches and real-time analytics.";
       } else if (msg.includes("add user") || msg.includes("create user")) {
@@ -548,6 +550,8 @@ document.getElementById('ajoutUserForm').addEventListener('submit', function(eve
         response = "There are two roles: 'entrepreneur' and 'investor'. Admins manage them from this dashboard.";
       } else if (msg.includes("statistics") || msg.includes("stats")) {
         response = "User statistics are shown on the dashboard homepage under 'Statistiques'.";
+      } else if (msg.includes("export pdf") || msg.includes("pdf")) {
+        response = "to export users pdf click on export pdf button in the right top of gestion users page.";
       } else if (msg.includes("logout") || msg.includes("sign out")) {
         response = "To log out, click your profile icon and select 'Logout'.";
       }else if (msg.includes("thanks") || msg.includes("sign out")) {
