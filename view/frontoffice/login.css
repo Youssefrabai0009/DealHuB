@@ -1,0 +1,163 @@
+/*login et register */
+
+/* Palette de couleurs */
+:root {
+    --primary-dark: #2F1A4A;
+    --primary-light: #F5F2F6;
+    --secondary: #A093AF;
+    --accent: #846CA0;
+    --text-dark: #847C84;
+}
+
+
+
+body {
+
+
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--primary-dark);
+    color: var(--text-dark);
+    
+    .background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+
+/* Conteneur principal */
+.login-container {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    height: 500px;
+    background: var(--primary-light);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Partie gauche */
+.left-section {
+    width: 50%;
+    background: var(--accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: var(--primary-light);
+}
+
+.left-section h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.left-section span {
+    font-weight: bold;
+    color: var(--primary-light);
+}
+
+.left-section p {
+    font-size: 16px;
+}
+
+/* Partie droite (Formulaire) */
+.right-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    text-align: center;
+    width: 80%;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
+
+/* Champs de saisie */
+.input-group {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-light);
+    border: 2px solid var(--secondary);
+    border-radius: 5px;
+    color: var(--primary-dark);
+    font-size: 16px;
+    outline: none;
+}
+
+input::placeholder {
+    color: var(--secondary);
+}
+
+/* Bouton de connexion */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    border: none;
+    border-radius: 5px;
+    color: var(--primary-light);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+    background: var(--secondary);
+}
+
+/* Texte d'inscription */
+.register-link {
+    margin-top: 10px;
+}
+
+.register-link a {
+    color: var(--dark-purple);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Stylish select dropdown */
+select.custom-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary);
+    border-radius: 5px;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23846CA0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}

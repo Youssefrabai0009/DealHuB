@@ -1,0 +1,171 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #2F1A4A;
+    background-color: #F5F2F6;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Header Styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2F1A4A; /* Example background color */
+    color: #fff;
+    padding: 10px 0;
+    z-index: 1000; /* Ensures the header stays on top of other content */
+}
+
+/* Add some spacing to the body to prevent content from hiding behind the fixed header */
+body {
+    padding-top: 80px; /* Adjust based on the height of your header */
+}
+
+
+header .logo {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #F5F2F6;
+    text-transform: uppercase;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav ul li {
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    color: #F5F2F6;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #B4A41A;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #846CA0;
+    padding: 100px 0;
+    text-align: center;
+    color: #F5F2F6;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero .btn {
+    background-color: #B4A41A;
+    color: #F5F2F6;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.hero .btn:hover {
+    background-color: #A093AF;
+}
+
+/* Features Section */
+.features {
+    background-color: #F5F2F6;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.feature-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.feature {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.feature p {
+    font-size: 1.1rem;
+}
+
+/* About Section */
+.about {
+    background-color: #A093AF;
+    padding: 80px 0;
+    color: #F5F2F6;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    background-color: #2F1A4A;
+    padding: 20px 0;
+    color: #F5F2F6;
+    text-align: center;
+}
+
+footer p {
+    font-size: 1rem;
+}
+/*logo*/
+img {
+    background: transparent;
+    border-radius: 8px;
+    object-fit: contain;
+}
+.site-logo {
+    height: 40px;
+    filter: brightness(0) invert(1); /* This turns a black logo white */
+}
