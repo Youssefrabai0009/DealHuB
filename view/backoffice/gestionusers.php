@@ -97,17 +97,25 @@ $totalPages = ceil($totalUsers / $resultsPerPage);
           <i class="fas fa-users w-6 text-center"></i>
           <span>Gestion users</span>
         </a>
-        <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
+        <a href="showcategorie.php" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
           <i class="fas fa-tags w-6 text-center"></i>
           <span>Gestion categories</span>
         </a>
-        <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
+        <a href="offres.php" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
           <i class="fas fa-briefcase w-6 text-center"></i>
           <span>Gestion offres</span>
         </a>
-        <a href="#" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
+        <a href="dash.php" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
           <i class="fas fa-comments w-6 text-center"></i>
           <span>Gestion speechs</span>
+        </a>
+        <a href="complaints_list_back.php" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
+          <i class="fa fa-exclamation-circle w-6 text-center"></i>
+          <span>Gestion réclamations</span>
+        </a>
+        <a href="complaints_statistics.php" class="sidebar-link flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-blue-500">
+          <i class="fa fa-bar-chart w-6 text-center"></i>
+          <span>Statistiques Des Réclamations</span>
         </a>
       </nav>
       <div class="p-4 border-t">

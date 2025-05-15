@@ -8,7 +8,7 @@ use Dompdf\Options;
 session_start();
 
 // Check if admin is logged in
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'entrepreneur') {
     header("Location: ../../view/frontoffice/login.html");
     exit;
 }

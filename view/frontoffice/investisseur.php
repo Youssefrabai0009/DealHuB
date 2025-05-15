@@ -14,37 +14,273 @@ $userEmail = isset($user['email']) ? htmlspecialchars($user['email']) : 'investi
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Profil investisseur - DealHub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="profil.css">
+
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        /* Reset and base */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1e1e2f, #2f1a4a);
+            color: #e0d7f5;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(47, 26, 74, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: -1;
+        }
+
+        video.background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.6) saturate(1.2);
+            transition: filter 0.5s ease;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3a1a6a, #5a3a9e);
+            color: #e0d7f5;
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        .header-container span {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #f0e9ff;
+            text-shadow: 0 0 8px #a18aff;
+        }
+
+        .header-container nav a {
+            color: #dcd6f7;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .header-container nav a:hover {
+            background: #a18aff;
+            color: #2f1a4a;
+            box-shadow: 0 0 8px #a18aff;
+        }
+
+        .profile-container {
+            width: 85%;
+            max-width: 900px;
+            margin: 40px auto 60px;
+            background: rgba(132, 108, 160, 0.85);
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(132, 108, 160, 0.6);
+            color: #f0e9ff;
+            text-align: left;
+        }
+
+        .profile-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f0e9ff;
+            text-shadow: 0 0 10px #a18aff;
+        }
+
+        .profile-header .role {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #dcd6f7;
+            margin-bottom: 25px;
+        }
+
+        .profile-details p {
+            font-size: 1.1rem;
+            margin: 8px 0;
+        }
+
+        .profile-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            user-select: none;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .update-btn {
+            background: linear-gradient(135deg, #6a4a9e, #a18aff);
+            color: #2f1a4a;
+            box-shadow: 0 4px 12px rgba(161, 138, 255, 0.6);
+        }
+
+        .update-btn:hover {
+            background: linear-gradient(135deg, #8e6edb, #c3b7ff);
+            color: #2f1a4a;
+            box-shadow: 0 6px 20px rgba(195, 183, 255, 0.9);
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.6);
+        }
+
+        .delete-btn:hover {
+            background: #ff4c4c;
+            box-shadow: 0 6px 20px rgba(255, 76, 76, 0.9);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(47, 26, 74, 0.9);
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-content {
+            background-color: rgba(132, 108, 160, 0.95);
+            margin: 10% auto;
+            padding: 20px 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            color: #f0e9ff;
+            box-shadow: 0 4px 15px rgba(132, 108, 160, 0.8);
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.8rem;
+            text-shadow: 0 0 8px #a18aff;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .modal-content input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            outline: none;
+            color: #2f1a4a;
+            margin-bottom: 10px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .modal-content input[type="text"]:focus {
+            box-shadow: 0 0 8px #a18aff;
+        }
+
+        .modal-content button {
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6a4a9e, #a18aff);
+            color: #2f1a4a;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            user-select: none;
+        }
+
+        .modal-content button:hover {
+            background: linear-gradient(135deg, #8e6edb, #c3b7ff);
+            box-shadow: 0 6px 20px rgba(195, 183, 255, 0.9);
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-          <!-- Logo and Title -->
-          <div class="container">
-    <div class="logo-container">
-        <img src="../../assets/logoweb2-transparent.png" alt="DealHub Logo" class="site-logo">
-        <h1 class="logo">DealHub</h1>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="accuil.php">Accueil</a></li>
-            <li><a href="logout.php">Déconnexion</a></li>
-            <li><a href="#" class="btn"><?= $userEmail ?> (Connecté)</a></li>
-        </ul>
-    </nav>
-</div>
+    <video class="background-video" autoplay loop muted>
+        <source src="../../assets/background.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture de vidéos.
+    </video>
 
+    <header>
+        <div class="header-container">
+            <span>DealHub</span>
+            <nav>
+                <a href="accuil.php">Accueil</a>
+                <a href="logout.php">Déconnexion</a>
+                <a href="#" class="btn"><?= $userEmail ?> (Connecté)</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- Main Profile Content -->
     <div class="profile-container">
         <div class="profile-header">
             <h1>Bienvenue, <?= htmlspecialchars($user['prenom']) ?> <?= htmlspecialchars($user['nom']) ?> 👋</h1>
-            <p class="role"> investisseur</p>
+            <p class="role">investisseur</p>
         </div>
 
         <div class="profile-details">
@@ -54,45 +290,37 @@ $userEmail = isset($user['email']) ? htmlspecialchars($user['email']) : 'investi
         </div>
 
         <div class="profile-actions">
-        <a href="modifier_profil.php" class="btn update-btn">Modifier Profil</a>
-                <a href="supprimer_compte.php" class="btn delete-btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">Supprimer Compte</a>
+           <a href="modifier_profil.php" class="btn update-btn">Modifier Profil</a>
+           <a href="index.php" class="btn update-btn">Speeches</a>
+           <a href="supprimer_compte.php" class="btn delete-btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">Supprimer Compte</a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 DealHub. Tous droits réservés.</p>
+    <!-- Modal for editing profile -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Modifier votre profil</h2>
+        <form id="editProfileForm" method="POST" action="modifier_profil.php">
+        <div class="form-group">
+            <label>Nom:</label>
+            <input type="text" name="nom" id="nom" value="<?= htmlspecialchars($user['nom']) ?>">
+            <div id="errorNom" style="color: red; font-size: 12px;"></div> <!-- Error message for Nom -->
         </div>
-    </footer>
-   
-<!-- Modal for editing profile -->
-<div id="editModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Modifier votre profil</h2>
-    <form id="editProfileForm" method="POST" action="modifier_profil.php">
-    <div class="form-group">
-        <label>Nom:</label>
-        <input type="text" name="nom" id="nom" value="<?= htmlspecialchars($user['nom']) ?>">
-        <div id="errorNom" style="color: red; font-size: 12px;"></div> <!-- Error message for Nom -->
+        <div class="form-group">
+            <label>Prénom:</label>
+            <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($user['prenom']) ?>">
+            <div id="errorPrenom" style="color: red; font-size: 12px;"></div> <!-- Error message for Prenom -->
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>">
+            <div id="errorEmail" style="color: red; font-size: 12px;"></div> <!-- Error message for Email -->
+        </div>
+        <button type="submit">Enregistrer</button>
+    </form>
+      </div>
     </div>
-    <div class="form-group">
-        <label>Prénom:</label>
-        <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($user['prenom']) ?>">
-        <div id="errorPrenom" style="color: red; font-size: 12px;"></div> <!-- Error message for Prenom -->
-    </div>
-    <div class="form-group">
-        <label>Email:</label>
-        <input type="text" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>">
-        <div id="errorEmail" style="color: red; font-size: 12px;"></div> <!-- Error message for Email -->
-    </div>
-    <button type="submit">Enregistrer</button>
-</form>
-
-
-  </div>
-</div>
 
 <script>
 document.getElementById("editProfileForm").addEventListener("submit", function(e) {

@@ -1,23 +1,187 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DealHub - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        /* Reset and base */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1e1e2f, #2f1a4a);
+            color: #e0d7f5;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(47, 26, 74, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: -1;
+        }
+
+        header,
+        footer {
+            background: linear-gradient(90deg, #3a1a6a, #5a3a9e);
+            color: #e0d7f5;
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        .header-container span, .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #f0e9ff;
+            text-shadow: 0 0 8px #a18aff;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav ul li a, nav ul li .btn {
+            color: #dcd6f7;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover, nav ul li .btn:hover {
+            background: #a18aff;
+            color: #2f1a4a;
+            box-shadow: 0 0 8px #a18aff;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto 50px;
+            max-width: 1200px;
+            text-align: left;
+        }
+
+        h1, h2, h3 {
+            color: #f0e9ff;
+            text-shadow: 0 0 10px #a18aff;
+        }
+
+        p {
+            color: #e0d7f5;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .hero {
+            margin: 60px auto 60px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+        }
+
+        .hero .btn {
+            padding: 14px 36px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-radius: 30px;
+            box-shadow: 0 6px 20px rgba(161, 138, 255, 0.7);
+        }
+
+        .features {
+            margin-bottom: 60px;
+        }
+
+        .feature-box {
+            display: flex;
+            gap: 30px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: rgba(132, 108, 160, 0.85);
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(132, 108, 160, 0.7);
+            flex: 1 1 30%;
+            color: #f0e9ff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(161, 138, 255, 0.9);
+        }
+
+        .feature h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            margin: 0;
+            font-weight: 500;
+            text-align: center;
+        }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <header>
-    <div class="container">
-               <!-- Logo and Title -->
-               <div class="flex items-center flex-col text-center">
-                <h1 class="text-xl font-bold text-gray-800 mb-2">DealHub</h1>
-                <img src="../../assets/logoweb2-transparent.png" alt="DealHub Logo" class="site-logo">
-            </div>
+    <div class="header-container">
+        <div class="flex items-center flex-col text-center">
+            <span class="logo">DealHub</span>
+            <img src="../../assets/logoweb2-transparent.png" alt="DealHub Logo" class="site-logo" style="height: 40px; filter: brightness(0) invert(1); border-radius: 8px; object-fit: contain;">
+        </div>
         <nav>
             <ul>
                 <li><a href="#features">Fonctionnalités</a></li>
@@ -29,39 +193,36 @@
     </div>
 </header>
 
-<section class="hero">
-    <div class="container">
-        <h2>Connectez les Entrepreneurs et les Investisseurs</h2>
-        <p>Publiez votre pitch, obtenez des offres, et faites avancer vos projets avec l'aide des investisseurs. Trouvez des opportunités et investissez dans l'avenir.</p>
-        <a href="register.php" class="btn hero-btn">Commencez maintenant</a>
-    </div>
+<section class="hero container">
+    <h2>Connectez les Entrepreneurs et les Investisseurs</h2>
+    <p>Publiez votre pitch, obtenez des offres, et faites avancer vos projets avec l'aide des investisseurs. Trouvez des opportunités et investissez dans l'avenir.</p>
+    <a href="register.php" class="btn hero-btn">Commencez maintenant</a>
 </section>
 
-<section id="features" class="features">
-    <div class="container">
-        <h2>Fonctionnalités</h2>
-        <div class="feature-box">
-            <div class="feature">
-                <h3>Pitchs Vidéos</h3>
-                <p>Les entrepreneurs publient leurs pitchs détaillant leur projet, le montant et l’equity demandée.</p>
-            </div>
-            <div class="feature">
-                <h3>Offres des Investisseurs</h3>
-                <p>Les investisseurs peuvent envoyer des offres aux entrepreneurs pour soutenir leur projet.</p>
-            </div>
-            <div class="feature">
-                <h3>Accès Exclusif</h3>
-                <p>Les investisseurs ont un accès exclusif aux pitchs et peuvent les consulter à tout moment.</p>
-            </div>
+<section id="features" class="features container">
+    <h2>Fonctionnalités</h2>
+    <div class="feature-box">
+        <div class="feature">
+            <h3>Pitchs Vidéos</h3>
+            <p>Les entrepreneurs publient leurs pitchs détaillant leur projet, le montant et l’equity demandée.</p>
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Pitchs Vidéos" style="width: 100%; max-width: 250px; margin-top: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(161, 138, 255, 0.7);">
+        </div>
+        <div class="feature">
+            <h3>Offres des Investisseurs</h3>
+            <p>Les investisseurs peuvent envoyer des offres aux entrepreneurs pour soutenir leur projet.</p>
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Offres des Investisseurs" style="width: 100%; max-width: 250px; margin-top: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(161, 138, 255, 0.7);">
+        </div>
+        <div class="feature">
+            <h3>Accès Exclusif</h3>
+            <p>Les investisseurs ont un accès exclusif aux pitchs et peuvent les consulter à tout moment.</p>
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80" alt="Accès Exclusif" style="width: 100%; max-width: 250px; margin-top: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(161, 138, 255, 0.7);">
         </div>
     </div>
 </section>
 
-<section id="about" class="about">
-    <div class="container">
-        <h2>À propos de DealHub</h2>
-        <p>DealHub est une plateforme qui met en relation des entrepreneurs et des investisseurs, facilitant ainsi le financement des projets innovants. Nous offrons des outils puissants pour les deux types d’utilisateurs pour maximiser leurs opportunités de croissance.</p>
-    </div>
+<section id="about" class="about container">
+    <h2>À propos de DealHub</h2>
+    <p>DealHub est une plateforme qui met en relation des entrepreneurs et des investisseurs, facilitant ainsi le financement des projets innovants. Nous offrons des outils puissants pour les deux types d’utilisateurs pour maximiser leurs opportunités de croissance.</p>
 </section>
 
 <footer>
@@ -72,201 +233,206 @@
 
 <!-- Chatbot -->
 <div class="chatbox" id="chatbox">
-    <div class="chatbox-header">
-      <span>Chatbot</span>
-      <button onclick="closeChat()">X</button>
-    </div>
-    <div class="chatbox-body" id="chatboxBody">
-      <div class="message bot"><span class="time">[Bot]</span> Hello! How can I assist you today?</div>
-    </div>
-    <div class="chatbox-footer">
-      <input type="text" id="userMessage" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()">
-      <button onclick="sendMessage()">Send</button>
-    </div>
+  <div class="chatbox-header">
+    <span>Chatbot</span>
+    <button onclick="closeChat()">X</button>
   </div>
-  
-  <!-- Chatbot toggle button -->
-  <button onclick="toggleChat()" class="chat-toggle-button">💬</button>
-  💬
-  </button>
-  <style>
-    .chat-toggle-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #10b981;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 50%;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-  </style>
-  
-  
-  <style>
-    .chatbox {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 320px;
-      height: 450px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-      display: none;
-      flex-direction: column;
-      z-index: 999;
-    }
-  
-    .chatbox-header {
-      background-color: #10b981;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      border-radius: 10px 10px 0 0;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  
-    .chatbox-body {
-      padding: 10px;
-      flex-grow: 1;
-      overflow-y: auto;
-      background: #f9f9f9;
-    }
-  
-    .chatbox-footer {
-      display: flex;
-      padding: 10px;
-      background-color: #f1f1f1;
-      border-radius: 0 0 10px 10px;
-      gap: 10px;
-    }
-  
-    .chatbox-footer input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-    }
-  
-    .chatbox-footer button {
-      padding: 10px 15px;
-      background-color: #10b981;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-  
-    .message {
-      margin: 8px 0;
-      padding: 8px 12px;
-      border-radius: 10px;
-      max-width: 85%;
-      word-wrap: break-word;
-      position: relative;
-      font-size: 14px;
-    }
-  
-    .message.user {
-      background-color: #e1f5fe;
-      align-self: flex-end;
-      text-align: right;
-    }
-  
-    .message.bot {
-      background-color: #e8f5e9;
-      align-self: flex-start;
-      text-align: left;
-    }
-  
-    .time {
-      font-size: 11px;
-      color: #555;
-      display: block;
-      margin-bottom: 3px;
-    }
-  
-    @media (max-width: 500px) {
-      .chatbox {
-        width: 95%;
-        right: 2.5%;
-      }
-    }
-  </style>
-  
-  <script>
-    function toggleChat() {
-      const chatbox = document.getElementById("chatbox");
-      chatbox.style.display = (chatbox.style.display === "flex") ? "none" : "flex";
-    }
-  
-    function closeChat() {
-      document.getElementById("chatbox").style.display = "none";
-    }
-  
-    function getTime() {
-      const now = new Date();
-      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }
-  
-    function sendMessage() {
-      const input = document.getElementById("userMessage");
-      const message = input.value.trim();
-      const chatboxBody = document.getElementById("chatboxBody");
-  
-      if (message === "") return;
-  
-      // Show user message
-      chatboxBody.innerHTML += `<div class="message user"><span class="time">[You - ${getTime()}]</span>${message}</div>`;
-      input.value = "";
-      chatboxBody.scrollTop = chatboxBody.scrollHeight;
-  
-      // Simulated bot response
-      setTimeout(() => {
-        let msg = message.toLowerCase();
-        let response = "I'm not sure how to answer that. Can you rephrase it?";
-  
-        if (msg.includes("hello") || msg.includes("hi")) {
-          response = "Hello 👋! How can I help you with the site?";
-        } else if (msg.includes("how are you")) {
-          response = "I'm a chatbot — always ready to help! 😊";
-        } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
-          response = "DealHub is a platform that connects entrepreneurs with investors using video pitches and real-time analytics.";
-        } if (msg.includes("sign up") || msg.includes("register")) {
-            response = "To sign up, click 'Register' at the top of the homepage and fill in your details.";
-          } else if (msg.includes("log in") || msg.includes("login")) {
-            response = "To log in, just click 'Login' at the top and enter your email and password.";
-          } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
-            response = "DealHub helps connect entrepreneurs with investors through pitch videos and smart tools.";
-          } else if (msg.includes("how to invest")) {
-            response = "Create an investor account, then browse pitch videos to invest in promising startups.";
-          } else if (msg.includes("how to pitch") || msg.includes("upload pitch")) {
-            response = "As an entrepreneur, sign in and upload a video pitch through your dashboard.";
-          } else if (msg.includes("contact") || msg.includes("help")) {
-            response = "You can reach our support at support@dealhub.com 📧 or via the Contact section.";
-          } else if (msg.includes("account types") || msg.includes("roles")) {
-            response = "There are two account types: Entrepreneur and Investor. Choose one when registering.";
-          
-        } else if (msg.includes("logout") || msg.includes("sign out")) {
-          response = "To log out, click your profile icon and select 'Logout'.";
+  <div class="chatbox-body" id="chatboxBody">
+    <div class="message bot"><span class="time">[Bot]</span> Hello! How can I assist you today?</div>
+  </div>
+  <div class="chatbox-footer">
+    <input type="text" id="userMessage" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
 
-        }else if (msg.includes("thanks") || msg.includes("sign out")) {
-          response = "your welcome 😊";
-        }
-  
-        chatboxBody.innerHTML += `<div class="message bot"><span class="time">[Bot - ${getTime()}]</span>${response}</div>`;
-        chatboxBody.scrollTop = chatboxBody.scrollHeight;
-      }, 800);
+<!-- Chatbot toggle button -->
+<button onclick="toggleChat()" class="bg-green-500 text-white p-3 rounded-full mb-4 mx-auto block w-12 h-12 text-xl leading-none">
+  💬
+</button>
+
+<style>
+  .chatbox {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    height: 450px;
+    background-color: rgba(47, 26, 74, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(161, 138, 255, 0.7);
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+    color: #e0d7f5;
+  }
+
+  .chatbox-header {
+    background-color: #5a3a9e;
+    color: #e0d7f5;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbox-body {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background: rgba(47, 26, 74, 0.85);
+    color: #e0d7f5;
+  }
+
+  .chatbox-footer {
+    display: flex;
+    padding: 10px;
+    background-color: #5a3a9e;
+    border-radius: 0 0 10px 10px;
+    gap: 10px;
+  }
+
+  .chatbox-footer input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #a18aff;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #e0d7f5;
+  }
+
+  .chatbox-footer input::placeholder {
+    color: #cfc9e8;
+  }
+
+  .chatbox-footer button {
+    padding: 10px 15px;
+    background-color: #a18aff;
+    color: #2f1a4a;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* Remove fixed positioning from toggle button */
+  button[onclick="toggleChat()"] {
+    position: static !important;
+    bottom: auto !important;
+    right: auto !important;
+    margin: 0 auto 1rem auto;
+    display: block;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .message {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 85%;
+    word-wrap: break-word;
+    position: relative;
+    font-size: 14px;
+  }
+
+  .message.user {
+    background-color: #a18aff;
+    color: #2f1a4a;
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  .message.bot {
+    background-color: rgba(132, 108, 160, 0.85);
+    color: #e0d7f5;
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .time {
+    font-size: 11px;
+    color: #cfc9e8;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  @media (max-width: 500px) {
+    .chatbox {
+      width: 95%;
+      right: 2.5%;
     }
-  </script>
-  
+  }
+</style>
+
+<script>
+  function toggleChat() {
+    const chatbox = document.getElementById("chatbox");
+    chatbox.style.display = (chatbox.style.display === "flex") ? "none" : "flex";
+  }
+
+  function closeChat() {
+    document.getElementById("chatbox").style.display = "none";
+  }
+
+  function getTime() {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("userMessage");
+    const message = input.value.trim();
+    const chatboxBody = document.getElementById("chatboxBody");
+
+    if (message === "") return;
+
+    // Show user message
+    chatboxBody.innerHTML += `<div class="message user"><span class="time">[You - ${getTime()}]</span>${message}</div>`;
+    input.value = "";
+    chatboxBody.scrollTop = chatboxBody.scrollHeight;
+
+    // Simulated bot response
+    setTimeout(() => {
+      let msg = message.toLowerCase();
+      let response = "I'm not sure how to answer that. Can you rephrase it?";
+
+      if (msg.includes("hello") || msg.includes("hi")) {
+        response = "Hello 👋! How can I help you with the site?";
+      } else if (msg.includes("how are you")) {
+        response = "I'm a chatbot — always ready to help! 😊";
+      } else if (msg.includes("i want you to help me")) {
+        response = "yes fr I'm a chatbot always ready to help! 😊";
+      } else if (msg.includes("what is dealhub") || msg.includes("about dealhub")) {
+        response = "DealHub is a platform that connects entrepreneurs with investors using video pitches and real-time analytics.";
+      } else if (msg.includes("add user") || msg.includes("create user")) {
+        response = "To add a user, click the '+' button next to the search bar. A form will appear to enter user info.";
+      } else if (msg.includes("delete user") || msg.includes("remove user")) {
+        response = "To delete a user, click the trash 🗑️ icon next to their row in the table.";
+      } else if (msg.includes("edit user") || msg.includes("edit profile")) {
+        response = "To edit a user, click the pencil ✏️ icon. You can update name, email, or role.";
+      } else if (msg.includes("roles") || msg.includes("what roles")) {
+        response = "There are two roles: 'entrepreneur' and 'investor'. Admins manage them from this dashboard.";
+      } else if (msg.includes("statistics") || msg.includes("stats")) {
+        response = "User statistics are shown on the dashboard homepage under 'Statistiques'.";
+      } else if (msg.includes("export pdf") || msg.includes("pdf")) {
+        response = "to export users pdf click on export pdf button in the right top of gestion users page.";
+      } else if (msg.includes("logout") || msg.includes("sign out")) {
+        response = "To log out, click your profile icon and select 'Logout'.";
+      }else if (msg.includes("thanks") || msg.includes("sign out")) {
+        response = "your welcome 😊";
+      }
+
+      chatboxBody.innerHTML += `<div class="message bot"><span class="time">[Bot - ${getTime()}]</span>${response}</div>`;
+      chatboxBody.scrollTop = chatboxBody.scrollHeight;
+    }, 800);
+  }
+</script>
 
 </body>
 </html>

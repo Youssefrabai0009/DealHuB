@@ -34,10 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     header("Location: ../backoffice/dashboard.php");
                     break;
                 case 'investisseur':
-                    header("Location: ../frontoffice/accuil.php");
+                    header("Location: ../frontoffice/index.php");
                     break;
                 case 'entrepreneur':
-                    header("Location: ../frontoffice/accuil.php");
+                    header("Location: ../frontoffice/listmyspeeches.php");
                     break;
                 default:
                     header("Location: login.html?error=Rôle non reconnu.");

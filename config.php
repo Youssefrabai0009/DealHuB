@@ -2,7 +2,7 @@
 // config.php
 
 $host = 'localhost';
-$dbname = 'login'; // Nom de votre base de données
+$dbname = 'dealhub'; // Nom de votre base de données
 $username = 'root';
 $password = '';
 

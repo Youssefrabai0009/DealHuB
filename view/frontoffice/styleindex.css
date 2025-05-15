@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F2F6;
+    color: #2F1A4A;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.container-custom {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.navbar {
+    background-color: #2F1A4A !important;
+}
+
+.navbar a {
+    color: #F5F2F6 !important;
+}
+
+.btn {
+    border-radius: 20px;
+}
+
+.btn-success {
+    background-color: #846CA0;
+    border-color: #846CA0;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #A093AF;
+    border-color: #A093AF;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #2F1A4A;
+    border-color: #2F1A4A;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #847C84;
+    border-color: #847C84;
+    color: white;
+}
+
+.btn-outline-light {
+    color: #F5F2F6;
+    border-color: #F5F2F6;
+}
+
+.video-item {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #A093AF;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: #846CA0;
+    color: white;
+}
+
+.video-item:hover {
+    background-color: #A093AF;
+    color: white;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+h3 {
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Tableau d'offres */
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.offres-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F5F2F6;
+    color: #2F1A4A;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.offres-table thead {
+    background-color: #A093AF;
+    color: white;
+}
+
+.offres-table th,
+.offres-table td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid #DAD3E6;
+}
+
+.offres-table tbody tr:hover {
+    background-color: #E6E0EE;
+}
+.status-accepte {
+    background-color: #d4edda !important; /* Vert clair */
+    color: #155724;
+    font-weight: bold;
+}
+
+.status-rejete {
+    background-color: #f8d7da !important; /* Rouge clair */
+    color: #721c24;
+    font-weight: bold;
+}
+body { font-family: Arial, sans-serif; background-color: #F5F2F6; color: #2F1A4A;}
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .video-item { cursor: pointer; padding: 10px; border: 1px solid #A093AF; margin: 5px 0; border-radius: 5px; background-color: #846CA0; color: white; }
+        .video-item:hover { background-color: #A093AF; }
+        .container-custom { max-width: 1200px; margin: auto; padding: 20px; }
+        .hidden { display: none; }
+        .video-container { display: flex; flex-direction: column; align-items: center; }
+        .header-buttons a { margin-left: 10px; }
+        .navbar { background-color: #2F1A4A !important; }
+        .navbar a { color: #F5F2F6 !important; }
+        .btn { border-radius: 20px; }
+        .btn-success { background-color: #846CA0; border-color: #846CA0; }
+        .btn-warning { background-color: #A093AF; border-color: #A093AF; }
+        .btn-primary { background-color: #2F1A4A; border-color: #2F1A4A; }
+        .btn-danger { background-color: #847C84; border-color: #847C84; }
+        video { width: 100%; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); }
+        h3 {
+        color: white; /* Change la couleur du texte en blanc */
+        font-size: 1.8em; /* Ajustez la taille de la police si nécessaire */
+        font-weight: bold; /* Rendre le texte en gras */
+        text-align: center; /* Centrer le texte */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajoute une ombre pour plus de lisibilité */
+    }
+    p{
+        color: white; /* Change la couleur du texte en blanc */
+         /* Ajustez la taille de la police si nécessaire */
+         /* Rendre le texte en gras */
+        text-align: center; /* Centrer le texte */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
